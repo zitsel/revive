@@ -9,11 +9,24 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+<% end %>
 <div class="field">
     <%= f.label "Item Name" %><br />
     <%= f.text_field :name %>
 </div>
+<div class="field">
+    <%= f.label "Weight (in grams)"%><br />
+    <%= f.text_field :weight%>
+</div>
+<div class="field">
+    <%= f.label "Department ID"%><br />
+    <%= f.text_field :department_id%>
+
+</div>
+<div class="field">
+    <%= f.label "Purchase Price"%><br />
+    <%= f.text_field :purchase_price%>
+  <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>

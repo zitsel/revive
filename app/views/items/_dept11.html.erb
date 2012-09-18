@@ -1,0 +1,30 @@
+
+
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+<% end %>
+Item#<%= @item.id%>
+<br />
+<%= @item.name%>
+<br />
+<br />
+<% atts=Array.new %>
+<% atts=["notes","brand","coat_type","cloth_color","cloth_type","pattern","size","jacket_buttons","jacket_vents","shoulder","chest","jacket_waist","full_sleeve","sleeve","cuff_extra","jacket_length"] %>
+<% atts.map do |i| %>
+<div class="field">
+    <%= f.label i %><br />
+    <%= f.text_field i %>
+</div>
+<% end %>
+<%= f.submit %>
+  </div>
+<% end %>

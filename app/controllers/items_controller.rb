@@ -1,6 +1,4 @@
 class ItemsController < ApplicationController
-  # GET /items
-  # GET /items.json
   def index
     @items = Item.all
 
@@ -10,6 +8,20 @@ class ItemsController < ApplicationController
     end
   end
 
+  def inspection
+      @item = Item.find(params[:id])
+	  respond_to do |format|
+	  format.html
+	  format.json { render json: @item }
+  end
+
+  end
+  def processing
+      @item = Item.find(params[:id])
+  end
+  def auction
+      @item = Item.find(params[:id])
+  end
   # GET /items/1
   # GET /items/1.json
   def show

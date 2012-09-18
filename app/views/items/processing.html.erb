@@ -1,0 +1,22 @@
+<%if @item.department_id == 2 %>
+    <h1>Neckwear Processing</h1>
+    <%=render 'dept2' %>
+    
+<%elsif @item.department_id == 5 %>
+    <h1>Dress Shoes Processing</h1>
+    <%= render 'dept5' %>
+<%elsif @item.department_id == 9%>
+    <h1>Jacket Processing</h1>
+    <%= render 'dept9' %>
+
+<%elsif @item.department_id == 10%>
+    <h1>Suit Processing</h1>
+    <%= render 'dept10' %>
+
+<%elsif @item.department_id == 11%>
+    <h1>Outerwear Processing</h1>
+    <%= render 'dept11' %>
+<%end%>
+
+<%= link_to 'Show', @item %> |
+<%= link_to 'Back', items_path %>
