@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
+    http_basic_authenticate_with :name => "admin", :password => "vtq2tyib"
   def index
-    @items = Item.all
-
+    @items = Item.where("name is not null")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @items }
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
 	  respond_to do |format|
 	  format.html
 	  format.json { render json: @item }
-  end
+      end
 
   end
   def processing
@@ -22,30 +22,59 @@ class ItemsController < ApplicationController
   def auction
       @item = Item.find(params[:id])
   end
+  def listing
+      @item = Item.find(params[:id])
+      @statuses = Status.all
+  end
   # GET /items/1
   # GET /items/1.json
   def show
     @item = Item.find(params[:id])
-
+  
+    if @item.department_id==2 
+	@package_weight = 25
+    elsif @item.department_id==5
+	@package_weight = 225
+    elsif @item.department_id==9 or @item.department_id==10
+	@package_weight = 250
+    elsif @item.department_id==11
+	@package_weight = 350
+    elsif @item.department_id==3
+	@package_weight = 25
+    else
+	@package_weight = 250
+    end
+   
+    @ship_weight = @package_weight + @item.weight
+    @ship_ounces = @ship_weight/28.349
+    @ship_imperial = @ship_ounces.divmod(16)
+   
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @item }
     end
   end
 
+  def status
+      if params[:name] == "all"
+	  @items = Item.all
+      else
+      @status = Status.find_by_name(params[:name])
+      @items = Item.find_all_by_status_id(@status.id)
+      end
+  end
+
   # GET /items/new
   # GET /items/new.json
   def new
     @item = Item.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @item }
-    end
+    @departments = Department.all
   end
 
   # GET /items/1/edit
   def edit
+      @departments = Department.all
+      @statuses = Status.all
     @item = Item.find(params[:id])
   end
 
@@ -69,7 +98,7 @@ class ItemsController < ApplicationController
   # PUT /items/1.json
   def update
     @item = Item.find(params[:id])
-
+    
     respond_to do |format|
       if @item.update_attributes(params[:item])
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }

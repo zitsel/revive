@@ -1,30 +1,38 @@
 <p id="notice"><%= notice %></p>
-<b>ID:</b>
-<%= @item.id %>
-  <b>Name:</b>
-  <%= @item.name %>
-  <b>Weight:</b>
-  <%= @item.weight %>
+<b>ID: </b><%= @item.id %>
+<br />
+<b>Name: </b><%= @item.name %>
+<br />
+<b>Weight: </b><%= @item.weight %> ounces
+<br />
+<b>Ship Weight: </b><%=@ship_imperial[0]%> lbs <%=number_with_precision(@ship_imperial[1], :precision=>1) %> ounces
+<br />
+<b>Status: </b><%=@item.status.name.titleize%>
+<br/>
   <br /><br />
   <b>List for templating script</b>
   <br /><br />
-
   <%if @item.department_id==2%>
       <%atts=[@item.condition,@item.notes,@item.brand,@item.tie_material,@item.tie_construction,@item.color,@item.tie_width,@item.tie_length,@item.pattern]%>
-
   <%elsif @item.department_id==5%>
       <%atts=[@item.condition,@item.notes,@item.brand,@item.model,@item.model_number,@item.style,@item.color,@item.size,@item.width,@item.last,@item.upper_material,@item.sole_material,@item.heel_material,@item.sole,@item.heel,@item.lining,@item.insole,@item.outsole_length,@item.outsole_width]%>
-
   <%elsif @item.department_id==9%>
-     <%atts=[@item.condition,@item.notes,@item.retailer,@item.designer,@item.model,@item.cloth_maker,@item.cloth_color,@item.cloth_type,@item.pattern,@item.jacket_buttons,@item.jacket_vents,@item.lapel_type,@item.pocket_type,@item.coat_lining,@item.cuff_buttons,@item.coat_construction,@item.shoulder,@item.chest,@item.jacket_waist,@item.sleeve,@item.cuff_extra,@item.jacket_length]%>
+      <%atts=[@item.condition,@item.notes,@item.retailer,@item.designer,@item.model,@item.cloth_maker,@item.cloth_color,@item.cloth_type,@item.pattern,@item.jacket_buttons,@item.jacket_vents,@item.lapel_type,@item.pocket_type,@item.coat_lining,@item.cuff_buttons,@item.coat_construction,@item.shoulder,@item.chest,@item.jacket_waist,@item.sleeve,@item.cuff_extra,@item.jacket_length]%>
   <%elsif @item.department_id==10%>
      <%atts=[@item.condition,@item.notes,@item.retailer,@item.designer,@item.model,@item.cloth_maker,@item.cloth_color,@item.cloth_type,@item.pattern,@item.jacket_buttons,@item.jacket_vents,@item.lapel_type,@item.pocket_type,@item.coat_lining,@item.cuff_buttons,@item.coat_construction,@item.trouser_style,@item.trouser_fastenings,@item.trouser_lining,@item.trouser_details,@item.shoulder,@item.chest,@item.jacket_waist,@item.sleeve,@item.cuff_extra,@item.jacket_length,@item.trouser_waist,@item.trouser_waist_extra,@item.inseam]%>
-
   <%elsif @item.department_id==11%>
-     <%atts=[@item.condition,@item.notes,@item.brand,@item.coat_type,@item.cloth_color,@item.cloth_type,@item.pattern,@item.size,@item.jacket_buttons,@item.jacket_vents,@item.shoulder,@item.chest,@item.jacket_waist,@item.full_sleeve,@item.sleeve,@item.cuff_extra,@item.jacket_length]%>
+      <%atts=[@item.condition,@item.notes,@item.brand,@item.coat_type,@item.cloth_color,@item.cloth_type,@item.pattern,@item.size,@item.jacket_buttons,@item.jacket_vents,@item.shoulder,@item.chest,@item.jacket_waist,@item.full_sleeve,@item.sleeve,@item.cuff_extra,@item.jacket_length]%>
+  <%else%>
+      <%atts=[]%>
  <%end%>
-  <%atts.map do |i|%>
-      <%=i%>:
+ 
+
+ <%atts.map do |i|%>
+     <%if i.class == String%>
+	 <%=i.titleize%>:
+     <%else%>
+	 <%=i%>:
+     <%end%>
 <%end%>
 
   <br /><br />

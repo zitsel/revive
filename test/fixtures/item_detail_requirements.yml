@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  department_id: MyString
+  item_detail_id: MyString
+
+two:
+  department_id: MyString
+  item_detail_id: MyString

@@ -1,4 +1,4 @@
-<h1>Listing items</h1>
+<h1><%=@status.name%></h1>
 <%= form_tag items_path, :method => 'get' do %>
     <p>
     <%= text_field_tag params[:id] %>
@@ -8,15 +8,16 @@
     <tr>
     <th>ID</th>
     <th>Name</th>
+    <th>Sold Price</th>
     <th></th>
     <th></th>
   </tr>
 
-  <% @items.each do |item| %>
-      <% status=Status.find(item.status_id) %> 
+  <% @items.each do |item|%>
     <tr>
     <td><%= item.id %></td>
     <td><%= item.name %></td>
+    <td><%= item.sold_price %></td>
     <td><%= link_to 'Show', item %></td>
     <td><%= link_to 'Edit', edit_item_path(item) %></td>
   </tr>

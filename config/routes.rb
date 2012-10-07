@@ -1,10 +1,16 @@
 Revive::Application.routes.draw do
-  resources :items  
+  resources :items
+  resources :statuses do
+      resources :items
+      resources :departments
+  end
+
   match 'items/check_in' => 'items#check_in'
   match 'items/:id/inspection' => 'items#inspection', :via => :get
   match 'items/:id/processing' => 'items#processing'
   match 'items/:id/listing' => 'items#listing'
   match 'items/:id/auction' => 'items#auction'
+  match 'items/list/status/:name' => 'items#status'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
