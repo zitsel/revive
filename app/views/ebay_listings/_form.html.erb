@@ -1,0 +1,41 @@
+<%= form_for(@ebay_listing) do |f| %>
+  <% if @ebay_listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ebay_listing.errors.count, "error") %> prohibited this ebay listing from being saved:</h2>
+
+      <ul>
+      <% @ebay_listing.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ebay_id %><br />
+    <%= f.text_field :ebay_id %>
+  </div>
+<div class="field">
+  <%= f.label "Item ID"%><br />
+  <%if @ebay_listing.item_id%>
+  <%=f.text_field :item_id%>
+  <%else%>
+  <%= collection_select(:ebay_listing, :item_id, @items, :id, :id)%>
+  <%end%>
+</div>
+  <div class="field">
+  <b>Result</b><br />
+  Active:
+  <%= f.radio_button :status, 'active'%>
+  <br />
+  Unsold:
+  <%= f.radio_button :status, 'unsold'%>
+  <br />
+  Sold:
+  <%= f.radio_button :status, 'sold'%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

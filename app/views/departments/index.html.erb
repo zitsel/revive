@@ -1,0 +1,5 @@
+<% @departments.map do |department| %>
+    <%= department.id %> - <%= link_to department.name.titleize, department_path(department.id)%> - <%= department.items.count %>
+    <br />
+<%end%>
+    <%= link_to "New", new_department_path%>

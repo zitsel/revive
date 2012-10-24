@@ -1,0 +1,24 @@
+<h1>Listing ebay listings</h1>
+<%= link_to 'New', new_ebay_listing_path%>
+
+<table>
+  <tr>
+    <th>Item ID</th>
+    <th>eBay ID</th>
+    <th>Status</th>
+    <th>Edit</th>
+  </tr>
+
+<% @listings.each do |listing| %>
+  <tr>
+    <td><%= link_to listing.item_id, item_path(listing.item_id)%></td>
+    <td><%= listing.ebay_id %></td>
+    <td><%= listing.status %></td>
+    <td><%= link_to 'Edit', edit_ebay_listing_path(listing) %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<br />
+

@@ -11,12 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121001202006) do
+ActiveRecord::Schema.define(:version => 20121022202713) do
 
   create_table "departments", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "ebay_listings", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "ebay_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "duration"
+    t.decimal  "start_price"
+    t.decimal  "end_price"
+    t.string   "status"
   end
 
   create_table "item_detail_requirements", :force => true do |t|
@@ -36,8 +47,12 @@ ActiveRecord::Schema.define(:version => 20121001202006) do
 
   create_table "item_details", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "item_id"
+    t.integer  "details_needed_id"
+    t.string   "value"
+    t.integer  "item_details_needed_id"
   end
 
   create_table "item_measurements", :force => true do |t|
@@ -48,6 +63,15 @@ ActiveRecord::Schema.define(:version => 20121001202006) do
 
 # Could not dump table "items" because of following StandardError
 #   Unknown type 'decmial' for column 'cuff_extra'
+
+  create_table "needed_item_details", :force => true do |t|
+    t.integer  "department_id"
+    t.string   "value"
+    t.string   "group"
+    t.integer  "order"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "statuses", :force => true do |t|
     t.string   "name"

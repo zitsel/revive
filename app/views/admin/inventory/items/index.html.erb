@@ -1,0 +1,23 @@
+<h1>Listing items</h1>
+<table>
+    <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @items.active.each do |item| %>
+      <% status=Status.find(item.status_id) %> 
+    <tr>
+    <td><%= item.id %></td>
+    <td><%= item.name %></td>
+    <td><%= link_to 'Show', item %></td>
+    <td><%= link_to 'Edit', edit_item_path(item) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_admin_inventory_item_path %>

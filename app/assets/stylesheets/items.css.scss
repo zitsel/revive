@@ -1,3 +1,70 @@
 // Place all the styles related to the items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@font-face {
+	font-family: "HoneyScriptBold";
+	src: url("/fonts/HoneyScript-SemiBold.ttf");
+	format:("truetype");
+}
+
+@font-face {
+	font-family: "Bebas Neue";
+	src: url("/fonts/BebasNeue.otf");
+	format:("otf");
+}
+
+body {
+	background-color: #FFFF99;
+}
+
+header p.logo {
+	font-family: "HoneyScriptBold", Arial, sans-serif;
+	font-size: 8em;
+	margin: 0px 0px -60px 0px;
+	text-align: center;
+	color: #311900;
+}
+.main_nav ul {
+	text-align: center;
+	border-bottom: 3px solid #311900;
+}
+.main_nav ul li {
+	color: #311900;
+	padding: 0px 40px;
+	display: inline;
+	font-size: 1.5em;
+	text-transform: uppercase;
+	font-family: "Bebas Neue", Helvetica, sans-serif;
+}
+
+
+.main {
+	background: #fff;
+	min-height: 800px;
+	border: 3px solid #311900;
+	
+}
+
+.main header h1 {
+	font-family: "Bebas Neue", Helvetica, sans-serif;
+	font-size: 2em;
+	padding-left: 1em;
+}
+
+footer.main_footer {
+	font-family: "Bebas Neue", Helvetica, sans-serif;
+
+}
+
+.products li {
+	display: inline;
+	float: left;
+	padding: 30px;
+	text-align: center;
+	font-family: Helvetica, sans-serif;
+}
+
+.products img {
+	width: 180px;
+	border-radius: 15px;
+}

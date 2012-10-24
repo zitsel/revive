@@ -25,6 +25,11 @@ Item#<%= @item.id%>
     <%= f.text_field i %>
 </div>
 <% end %>
-<%= f.submit %>
-  </div>
+<%@item.status_id=2 unless @item.status_id==4%>
+
+<div class="field">
+  <%= f.hidden_field :status_id%>
+  <br />
+  <%= f.submit %>
+</div>
 <% end %>

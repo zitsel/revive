@@ -1,4 +1,6 @@
 class StatusesController < ApplicationController
+  http_basic_authenticate_with :name => "admin", :password => "vtq2tyib"
+
   # GET /statuses
   # GET /statuses.json
   def index

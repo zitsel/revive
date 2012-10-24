@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+<%=link_to "Back", departments_path%>
+<br /><br />
+<%@items.map do |item|%>
+    <%item.name="Blank" if item.name==""%>
+    <%=item.id%> - <%=link_to item.name, edit_item_path(item.id)%>
+    <br />
+
+<%end%>

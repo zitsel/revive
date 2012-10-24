@@ -1,5 +1,3 @@
-
-
 <%= form_for(@item) do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
@@ -15,16 +13,21 @@
 Item#<%= @item.id%>
 <br />
 <%= @item.name%>
+<%@item.status_id="2" unless @item.status_id==4%>
 <br />
 <br />
 <% atts=Array.new %>
 <% atts=["brand","tie_width","tie_length","tie_material","tie_construction","color","pattern"] %>
 <% atts.map do |i| %>
-<div class="field">
+  <div class="field">
     <%= f.label i %><br />
     <%= f.text_field i %>
-</div>
-<% end %>
-<%= f.submit %>
   </div>
+<% end %>
+
+<div class="field">
+  <%= f.hidden_field :status_id%>
+  <br />
+  <%= f.submit %>
+</div>
 <% end %>

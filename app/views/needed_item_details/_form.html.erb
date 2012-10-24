@@ -1,0 +1,30 @@
+<%= form_for(@department) do |f| %>
+<%= f.fields_for :needed_item_detail do |l| %>
+  <% if @needed_item_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@needed_item_detail.errors.count, "error") %> prohibited this ebay listing from being saved:</h2>
+
+      <ul>
+      <% @needed_item_detail.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= l.label :group %><br />
+    <%= l.text_field :group%>
+  </div>
+  <div class="field">
+    <%= l.label :order %><br />
+    <%= l.text_field :order%><br />
+  </div>
+  <div class="field">
+    <%= l.label :value %><br />
+    <%= l.text_field :value%><br />
+  </div>
+  <div class="actions">
+    <%= l.submit %>
+  </div>
+<% end %>
+<% end %>

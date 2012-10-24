@@ -1,0 +1,78 @@
+<div class="main">
+	<header class="page_title">
+    	<h1>Clothing > Men's > <%=@item.department.name%> > <%=@item.product_brand%> </h1>
+  	</header>
+
+	<article class="show_product">
+        <nav class="show_product_other_photos">
+            <%#This is some horrid code to show the photos of an item until I get the photos indexed in the database%>
+            <%(1..Dir.entries("/usr/local/share/public/dev/revive/app/assets/images/#{@item.id}/").size-3).to_a.each do |img|%>
+                <a target="_blank" href="/assets/<%=@item.id%>/<%=img%>.jpg">
+                    <%=image_tag("#{@item.id}/#{img}.jpg") if File.exist?("/usr/local/share/public/dev/revive/app/assets/images/#{@item.id}/#{img}.jpg")%>
+                </a>
+            <%end%>
+        </nav>
+
+        <div class="show_product_main_photo">
+    	   <%=image_tag("#{@item.id}/0.jpg")%>
+        </div>
+
+    	<div class="product_description">
+            <header class="product">
+                    <p>
+                       <b><%=@item.product_description%></b>
+                    </p>
+            </header>
+            <table class="sizeandstuff">
+                <tr>
+                    
+                    <td><%=number_to_currency(@item.retail_price, :unit => "$", :precision => 0)%></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>Size:</td>
+                    <td class="right"><%=@item.product_size%></td>
+                    <td class="help"><a class="help" href="">&nbsp;Size Chart&nbsp;</a></td>
+                </tr>
+                <tr>
+                    <td>Condition:</td>
+                    <td class="right"><%=@item.condition%>/5</td>
+                    <td class="help"><a class="help" href="/">&nbsp;Condition Chart&nbsp;</a></td>
+                </tr>
+            </table>
+            <p class="shipandstuff">
+                <b>Free Shipping (US Only)</b>
+                <br />
+                <b>Returns Accepted</b>
+            </p>
+    		<header class="product">
+                <p>
+                    <b>Product Details</b>
+                </p>
+            </header>
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc adipiscing tortor aliquet eros tristique ornare sit amet tempor risus. Integer augue eros, vehicula ac dignissim ut, euismod vitae elit. Vestibulum pulvinar rutrum interdum. Duis sed dolor lacus. Sed vestibulum ullamcorper augue, sit amet gravida augue adipiscing a. Donec nec tortor vitae lectus facilisis pharetra quis non quam. Etiam blandit egestas lacus eget hendrerit. Phasellus sodales, diam sit amet pretium fermentum, nisl quam pulvinar leo, gravida vestibulum est ante vel enim.
+            </p>
+            <header class="product">
+                <p>
+                    <b>How to Buy</b>
+                </p>
+            </header>
+            <p>
+                Online ordering is not available through our website at this time. If you'd like to purchase this item, please come by our showroom at 130 5th Street in Valley Junction. You may also purchase this item through our eBay account.
+                <br />
+                <br />
+                <%if @listing.ebay_id%>
+                <a class="button" href="http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item=<%=@listing.ebay_id%>">&nbsp;Buy through eBay&nbsp;</a>
+                <%end%>
+                <a class="button" href="mailto:sales@revive-clothiers.com?subject=Item#<%=@item.id%>">&nbsp;Make an Appointment&nbsp;</a>
+                
+                <br />
+                <br />
+            </p>
+    	</div>
+		
+	</article>
+ </div>

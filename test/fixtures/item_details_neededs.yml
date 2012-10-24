@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dept_id: 1
+  value: MyString
+  group: MyString
+  order: 1
+
+two:
+  dept_id: 1
+  value: MyString
+  group: MyString
+  order: 1

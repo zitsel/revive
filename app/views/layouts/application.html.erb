@@ -1,14 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Revive</title>
+    <title>Revive Clothiers <%=@category.titleize if @category%></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <link rel="icon" href="/favicon.png" />
 </head>
 <body>
+  <!--
+  <div class="top_nav_container">
+    <div class="top_left_nav">
+      <ul class="nav">
+        <li class="nav_item">Questions?</li>
+        <li class="nav_item">Call/Text 1 (515) 423-0664</li>
+      </ul> 
+    </div>
+    <div class="top_right_nav">
+      <ul class="nav">
+        <li class="nav_item">Register</li>
+        <li class="nav_item">Login</li>
+        <li class="nav_item">Cart (0)</li>
+      </ul>
+    </div>
+  </div>
+-->
+  <header>
 
+    <div class="logo">
+      Revive Clothiers
+    </div>
+
+    <div class="main_nav">
+      <nav>
+        <ul class="nav">
+            <li class="nav_item"><a class="main_nav_item" href="/clothing/recent">New Arrivals</a></li>
+          <%unless Item.active.neckwear.count==0%>
+            <li class="nav_item"><a class="main_nav_item" href="/clothing/neckwear">Neckwear</a></li>
+          <%end%>
+          <%unless Item.active.shirts.count==0%>
+            <li class="nav_item"><a class="main_nav_item" href="/clothing/shirts">Shirts</a></li>
+          <%end%>
+          <%unless Item.active.shoes.count==0%>
+            <li class="nav_item"><a class="main_nav_item" href="/clothing/shoes">Shoes</a></li>
+          <%end%>
+          <%unless Item.active.jackets.count==0%>
+            <li class="nav_item"><a class="main_nav_item" href="/clothing/jackets">Jackets</a></li>
+          <%end%>
+          <%unless Item.active.suits.count==0%>
+            <li class="nav_item"><a class="main_nav_item" href="/clothing/suits">Suits</a></li>
+          <%end%>
+          <%unless Item.active.outerwear.count==0%>
+            <li class="nav_item"><a class="main_nav_item" href="/clothing/outerwear">Outerwear</a></li>
+          <%end%>
+          <%unless Item.active.sweaters.count==0%>
+            <li class="nav_item"><a class="main_nav_item" href="/clothing/sweaters">Sweaters</a></li>
+          <%end%>
+        </ul>
+      </nav>
+    </div>
+
+  </header>
+  
 <%= yield %>
 
+  <footer class="main_footer">
+    &copy;2012 Diligentia, LLC - All Rights Reserved
+  </footer>
 </body>
 </html>

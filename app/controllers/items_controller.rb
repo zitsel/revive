@@ -1,11 +1,7 @@
 class ItemsController < ApplicationController
-    http_basic_authenticate_with :name => "admin", :password => "vtq2tyib"
+http_basic_authenticate_with :name => "admin", :password => "vtq2tyib"
   def index
-    @items = Item.where("name is not null")
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @items }
-    end
+    @items = Item.active
   end
 
   def inspection
@@ -30,7 +26,6 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
     @item = Item.find(params[:id])
-  
     if @item.department_id==2 
 	@package_weight = 25
     elsif @item.department_id==5
@@ -44,7 +39,9 @@ class ItemsController < ApplicationController
     else
 	@package_weight = 250
     end
-   
+    unless @item.weight
+	@item.weight=1234
+    end
     @ship_weight = @package_weight + @item.weight
     @ship_ounces = @ship_weight/28.349
     @ship_imperial = @ship_ounces.divmod(16)
