@@ -13,7 +13,6 @@
 Item#<%= @item.id%>
 <br />
 <%= @item.name%>
-<%@item.status_id="2" unless @item.status_id==4%>
 <br />
 <br />
 <% atts=Array.new %>
@@ -25,9 +24,7 @@ Item#<%= @item.id%>
   </div>
 <% end %>
 
-<div class="field">
-  <%= f.hidden_field :status_id%>
-  <br />
-  <%= f.submit %>
-</div>
+  <div class="actions">
+<%= f.submit %>
+    </div>
 <% end %>

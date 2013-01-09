@@ -1,0 +1,28 @@
+ <%if @item.department_id==3%>
+   <br /><br />
+   <p style="font-face:arial">
+   Title:<br /> <%="#{@item.brand} #{@item.cloth_color} #{@item.pattern} #{@item.cloth_type} #{@item.collar_type} Collar #{@item.collar}/#{@item.sleeve} #{@item.size} [#{@item.id}]"%>
+   <br />
+   Brand: <%=@item.brand%><br />
+   Tagged Size: <%=@item.tagged_size%><br />
+   Collar Size: <%=@item.collar%><br />
+   Sleeve Length: <%=@item.sleeve%><br />
+   Chest Size: <%=@item.chest%><br />
+   Material: <%=@item.cloth_type%><br />
+   color: <%=@item.cloth_color%><br />
+   pattern: <%=@item.pattern%><br />
+<%elsif @item.department_id==2%>
+<br /><br />
+<p style="font-face:arial">
+   Title:<br /><%="#{@item.brand.titleize} #{@item.color.titleize} #{@item.pattern.titleize} #{@item.tie_material.titleize} Tie [#{@item.id}]"%>
+   <br />
+   <%elsif @item.department_id==5%>
+       <p style="font-face: Arial">
+       <br />
+       Title:<br />
+       <%="#{@item.brand} #{@item.model} #{@item.color} #{@item.style} #{@item.size} #{@item.width} #{@item.last} Last [#{@item.id}]"%>
+   <%elsif @item.department_id==11%>
+       <p>
+       <br />
+       Title:<br />
+  <%end%> 

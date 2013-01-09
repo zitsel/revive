@@ -1,0 +1,33 @@
+<style type="text/css">
+<%= render '/products/style'%>
+body {
+    background: #ffffff;
+}
+
+</style>
+<div class="main">
+    
+    <header class="page_title">
+        <div class="logo">
+            <a target="_blank" href="http://revive-clothiers.com"><img src="http://revive-clothiers.com/assets/ebaytitle.png" /></a>
+        </div>
+        <h1>Clothing > Men's > <%=@item.department.name%> > <%=@item.product_brand%> </h1>
+    </header>
+
+    <article class="show_product">
+        <%= render '/products/detail_photos_nav'%>
+        <%= render '/products/main_photo'%>
+        
+        <div class="product_description">
+            <%= render '/products/main_details'%>
+            <%= render '/products/promotional_details'%>
+            <%= render '/products/product_details'%>
+        </div>
+        <%= render '/products/terms'%>
+    </article>
+</div>
+
+<footer class="main_footer">
+&copy;2012 Diligentia, LLC - All Rights Reserved
+</footer>
+

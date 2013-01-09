@@ -34,27 +34,30 @@
     <div class="main_nav">
       <nav>
         <ul class="nav">
-            <li class="nav_item"><a class="main_nav_item" href="/clothing/recent">New Arrivals</a></li>
           <%unless Item.active.neckwear.count==0%>
-            <li class="nav_item"><a class="main_nav_item" href="/clothing/neckwear">Neckwear</a></li>
+            <li class="nav_item"><a class="main_nav_item" href="http://revive-clothiers.com/clothing/neckwear">Neckwear</a></li>
           <%end%>
           <%unless Item.active.shirts.count==0%>
-            <li class="nav_item"><a class="main_nav_item" href="/clothing/shirts">Shirts</a></li>
+            <li class="nav_item"><a class="main_nav_item" href="http://revive-clothiers.com/clothing/shirts">Shirts</a></li>
           <%end%>
           <%unless Item.active.shoes.count==0%>
-            <li class="nav_item"><a class="main_nav_item" href="/clothing/shoes">Shoes</a></li>
+            <li class="nav_item"><a class="main_nav_item" href="http://revive-clothiers.com/clothing/shoes">Shoes</a></li>
           <%end%>
           <%unless Item.active.jackets.count==0%>
-            <li class="nav_item"><a class="main_nav_item" href="/clothing/jackets">Jackets</a></li>
+            <li class="nav_item"><a class="main_nav_item" href="http://revive-clothiers.com/clothing/jackets">Jackets</a></li>
           <%end%>
           <%unless Item.active.suits.count==0%>
-            <li class="nav_item"><a class="main_nav_item" href="/clothing/suits">Suits</a></li>
+            <li class="nav_item"><a class="main_nav_item" href="http://revive-clothiers.com/clothing/suits">Suits</a></li>
           <%end%>
           <%unless Item.active.outerwear.count==0%>
-            <li class="nav_item"><a class="main_nav_item" href="/clothing/outerwear">Outerwear</a></li>
+            <li class="nav_item"><a class="main_nav_item" href="http://revive-clothiers.com/clothing/outerwear">Outerwear</a></li>
           <%end%>
           <%unless Item.active.sweaters.count==0%>
-            <li class="nav_item"><a class="main_nav_item" href="/clothing/sweaters">Sweaters</a></li>
+            <li class="nav_item"><a class="main_nav_item" href="http://revive-clothiers.com/clothing/sweaters">Sweaters</a></li>
+            <%end%>
+            <%unless Item.available.handmades.count==0%>
+            <li class="nav_item"><a class="main_nav_item" href="http://revive-clothiers.com/clothing/handmades">Handmades</a></li>
+
           <%end%>
         </ul>
       </nav>
@@ -64,7 +67,7 @@
   
 <%= yield %>
 
-  <footer class="main_footer">
+  <footer style="clear:both;" class="main_footer">
     &copy;2012 Diligentia, LLC - All Rights Reserved
   </footer>
 </body>

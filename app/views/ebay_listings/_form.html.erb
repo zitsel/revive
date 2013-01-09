@@ -1,4 +1,7 @@
 <%= form_for(@ebay_listing) do |f| %>
+  
+
+
   <% if @ebay_listing.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ebay_listing.errors.count, "error") %> prohibited this ebay listing from being saved:</h2>
@@ -11,31 +14,93 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :ebay_id %><br />
-    <%= f.text_field :ebay_id %>
-  </div>
-<div class="field">
-  <%= f.label "Item ID"%><br />
-  <%if @ebay_listing.item_id%>
-  <%=f.text_field :item_id%>
-  <%else%>
-  <%= collection_select(:ebay_listing, :item_id, @items, :id, :id)%>
-  <%end%>
-</div>
-  <div class="field">
-  <b>Result</b><br />
-  Active:
-  <%= f.radio_button :status, 'active'%>
+
+
+  <%@item=Item.find(@ebay_listing.item_id)%>
   <br />
-  Unsold:
-  <%= f.radio_button :status, 'unsold'%>
+  <a href ="/products/show/<%=@item.id%>">Product Page</a> |
+  <%= link_to "Item Page", @item%> | 
+  <%= link_to  "Edit Item", edit_item_path(@item)%> |
+  <%= link_to "Processing", processing_item_path(@item)%> |
+  <%= link_to "Retail", retail_item_path(@item)%> | 
   <br />
-  Sold:
-  <%= f.radio_button :status, 'sold'%>
-  </div>
+  <%@item_weight ? nil : @item_weight = 1
+    @sw = ((Hash["2", 25, "5", 225, "9", 250, "10", 250, "11", 350, "3", 25, "13", 250, "15", 250]["#{@item.department_id}"] + @item.weight)/28.349).divmod(16)%>
+    <b>Ship Weight: </b>
+    <br />
+    <%="#{@sw[0]} LBS #{@sw[1].floor} OUNCES"%>
+    <br />
+    <b>eBay Title</b>
+    <br />
+  <textarea rows="1" cols="80"><%="#{@item.product_brand.titleize} #{@item.product_description.titleize} #{@item.product_size} [#{@item.id}]"%></textarea>
+    <br />
+    <b>Condition</b>
+    <br />
+    <%=render "/products/condition"%>
+    <br />
+    <b>Number of Times Listed:</b>
+    <%=EbayListing.find_all_by_item_id(@item.id).count%>
+    <br />
+    <b>eBay Details</b>
+    <br />
+    <%=
+    case @item.department_id
+    when 10 then "Size: #{@item.product_size} | Style: #{@item.jacket_buttons} Button | Trouser Waist: #{@item.trouser_waist} | Trouser Inseam: #{@item.inseam} | Cloth Type: #{@item.cloth_type} | Cloth Color: #{@item.cloth_color} | Cloth Pattern: #{@item.pattern}"
+    end
+    %>
+    <br />
+    <b>Ebay HTML</b>
+    <br />
+    <textarea>
+      <%=render "/products/ebay_product_information"%>
+    </textarea>
+    <br />
+
+    <div class="field">
+     <%= f.label "eBay ID"%>
+      <br />
+      <%= f.text_field :ebay_id %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Item ID"%><br />
+      
+
+      <%if @ebay_listing.item_id%>
+        <%=f.text_field :item_id%>
+      <%else%>
+        <%= collection_select(:ebay_listing, :item_id, @items, :id, :id)%>
+      <%end%>
+
+
+
+    </div>
+
+    <div class="field">
+      <% EbayListing.find_all_by_item_id(@item.id).count==0 ? @ebay_listing.listing_type = "new" : @ebay_listing.listing_type = "relist"%>
+
+      <%= f.label "Listing Type"%><br />
+      <%= f.text_field :listing_type%>
+    </div>
+
+    <div class="field">
+      <% @ebay_listing.status ||= "active" %>
+      <b>Result</b><br />
+      Active:
+      <%= f.radio_button :status, 'active'%>
+      <br />
+      Unsold:
+      <%= f.radio_button :status, 'unsold'%>
+      <br />
+      Sold:
+      <%= f.radio_button :status, 'sold'%>
+      <br />
+      Pending:
+      <%= f.radio_button :status, 'pending'%>
+      <br />
+    </div>
 
   <div class="actions">
-    <%= f.submit %>
-  </div>
+      <%= f.submit %>
+    </div>
 <% end %>

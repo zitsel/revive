@@ -1,0 +1,10 @@
+            <%=
+            case @item.condition
+                when 1 then "Damaged & Unwearable"
+                when 2 then "Item is flawed. You may or may not find the garment to be wearable."
+                when 3 then "Item is in normal used condition. It is free from damage but may show signs of wear."
+                when 4 then "Item is in excellent used condition. Item is free from wear and is in like new condition."
+                when 5 then "Item is in new condition. No evidence that it has ever been worn."
+            end
+            %>
+            Notes: <%=@item.condition_notes == "" ? "None" : @item.condition_notes%>

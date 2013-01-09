@@ -1,0 +1,38 @@
+<%= form_for(@check) do |f| %>
+  <% if @check.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@check.errors.count, "error") %> prohibited this check from being saved:</h2>
+
+      <ul>
+      <% @check.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </div>
+  <div class="field">
+    <%@check.check_number=Check.last.check_number+1%>
+    <%= f.label :check_number %><br />
+    <%= f.number_field :check_number %>
+  </div>
+  <div class="field">
+    <%= f.label :amount_words %><br />
+    <%= f.text_field :amount_words %>
+  </div>
+  <div class="field">
+    <%= f.label :amount_number %><br />
+    <%= f.text_field :amount_number %>
+  </div>
+  <div class="field">
+    <%= f.label :pay_to %><br />
+    <%= f.text_field :pay_to %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

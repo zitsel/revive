@@ -18,18 +18,14 @@ Item#<%= @item.id%>
 <br />
 <br />
 <% atts=Array.new %>
-<% atts=["retailer","designer","model","cloth_maker","cloth_color","cloth_type","pattern","jacket_buttons","jacket_vents","lapel_type","pocket_type","coat_lining","cuff_buttons","coat_construction","shoulder","chest","jacket_waist","sleeve","cuff_extra","jacket_length"] %>
+<% atts=["retailer","designer","model","cloth_maker","cloth_color","cloth_type","pattern","jacket_buttons","jacket_vents","lapel_type","pocket_type","coat_lining","cuff_buttons","coat_construction","shoulder","chest","jacket_waist","sleeve","cuff_extra","jacket_length","notes"] %>
 <% atts.map do |i| %>
 <div class="field">
     <%= f.label i %><br />
     <%= f.text_field i %>
 </div>
 <% end %>
-<%@item.status_id=2 unless @item.status_id==4%>
-
-<div class="field">
-  <%= f.hidden_field :status_id%>
-  <br />
-  <%= f.submit %>
-</div>
+  <div class="actions">
+<%= f.submit %>
+    </div>
 <% end %>

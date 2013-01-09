@@ -1,18 +1,25 @@
-<section class="main">
-  <header>
-    <h1>New Arrivals</h1>
-  </header>
-  <article class="products">
-    <ul>
-      <% @items.recent.map do |i| %>
-      <li>
-          <a href="/items/<%=i.id%>/"><img src="/img/<%=i.id%>/0.jpg" /></a>
-          <br />
-          <b><%=%></b>
-          <br />
-          <%=number_to_currency(i.retail_price, :unit => "$", :precision => 0)%>
-        </li>
-      </ul>
-      <%end%>
-  </article>
-</section>
+<h1>Listing items</h1>
+<table>
+    <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Photo</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @items.active.each do |item| %>
+      <% status=Status.find(item.status_id) %> 
+    <tr>
+    <td><%= item.id %></td>
+    <td><%= item.name %></td>
+    <td><img src="http://revive-clothiers.com/img/<%=item.id%>/0.jpg" width="300px" /></td>
+    <td><%= link_to 'Show', item %></td>
+    <td><%= link_to 'Edit', edit_item_path(item) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_item_path %>

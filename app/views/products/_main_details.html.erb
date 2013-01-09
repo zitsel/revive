@@ -1,0 +1,42 @@
+<header class="product">
+    <p>
+        <b><%=@item.product_description.titleize%></b>
+    </p>
+</header>
+
+<table class="sizeandstuff">
+    <tr>
+
+        <td><%=number_to_currency(@item.retail_price, :unit => "$", :precision => 0)%> - 
+        <% case @item.status_id %>
+        <% when 3 %>
+        New Listing
+        <% when 4 %>
+        Available Now
+        <% when 5 %>
+        Sold
+        <% when 10 %>
+        Sale Pending
+        <%end%>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>Size:</td>
+        <td class="right"><%=@item.product_size%></td>
+    </tr>
+    <tr>
+        <td style="font-size:1em">All of our garments are sized by actual measurements for consistency. <a class="link" href="http://revive-clothiers.com/measurements">How we measure and size garments.</a></td>
+    <tr>
+        <td>Condition:</td>
+        <td class="right"><%=@item.condition%>/5</td>
+    </tr>
+    <tr>
+        <td style="font-size:1em">
+            <%=render 'products/condition'%>
+        </td>
+    </tr>
+</table>
+

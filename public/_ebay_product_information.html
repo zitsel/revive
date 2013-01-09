@@ -1,0 +1,260 @@
+<style type="text/css">
+
+footer {
+    font-family: sans-serif;
+}
+
+body {
+    color: #311900;
+    font-family: sans-serif;
+}
+
+.logo {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    line-height: 74px;
+}
+
+.nav_item {
+    display: inline;
+}
+
+div.main_nav li {
+    font-size: 2em;
+    padding: 1em;
+}
+
+div.main {
+    background: #fffccc;
+    border: 3px solid #311900;
+    float: left;
+    min-width: 100%;
+    min-height: 800px;
+}
+
+div.product_description {
+    margin: 0px 100px 5px 600px;
+    border-left: 1px solid #311900;
+    padding: 0px 2em 0px 2em;
+}
+
+nav.show_product_other_photos {
+    width: 250px;
+    float:left;
+    text-align:center;
+    margin-left: 10px;
+}
+
+.show_product_other_photos a:hover img, .products_list_img a:hover img{
+    transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+}
+
+img {
+    border-radius: 15px;
+}
+
+div.show_product_main_photo {
+    float:left;
+    max-width: 300px;
+    border-left: 1px solid #311900;
+    border-bottom: 1px solid #311900;
+    margin-left: 10px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.show_product_main_photo img {
+    max-width: inherit;
+}
+
+.show_product_other_photos img{
+    max-width:120px;
+}
+
+a.link {
+    color:#311900; 
+}
+
+a.link :hover {
+    text-decoration: bold;
+}
+
+a.button {
+    border: 2px solid #311900;
+    border-radius: 5px;
+    padding: 1px;
+    box-shadow: 5px 5px #311900;
+    -moz-box-shadow: 5px 5px #311900;
+    letter-spacing: 1px;
+    margin: 1em;
+}
+
+header.page_title {
+    margin: 2em;
+}
+
+header.product {
+    font-size: 1.5em;
+}
+
+table.sizeandstuff td{
+    font-size: 1.5em;
+    min-width: 100px;
+}
+
+td.right {
+    text-align: right;
+}
+
+p.shipandstuff {
+    font-size: 2em;
+    border-top: 1px solid #311900;
+    border-bottom: 1px solid #311900;
+}
+
+td.price {
+    text-align: center;
+    font-size: 5em;
+}
+
+.products p {
+    margin: 5px;
+}
+
+table.products_details tr{
+    width: 100%;
+}
+
+</style>
+    <div class="main">
+    <header class="page_title">
+    <div class="logo">
+     <a target="_blank" href="http://revive-clothiers.com"><img src="http://revive-clothiers.com/assets/ebaytitle.png" /></a>
+    </div>
+        <h1>Clothing > Men's > <%=@item.department.name%> > <%=@item.product_brand%> </h1>
+    </header>
+    <article class="show_product">
+                <nav class="show_product_other_photos">
+
+            <%#This is some horrid code to show the photos of an item until I get the photos indexed in the database%>
+            <%(1..Dir.entries("/usr/local/share/public/dev/revive/app/assets/images/#{@item.id}/").size-3).to_a.each do |img|%>
+                <%if File.exist?("/usr/local/share/public/dev/revive/app/assets/images/#{@item.id}/#{img}.jpg")%>
+                <a target="_blank" href="http://revive-clothiers.com/assets/<%=@item.id%>/<%=img%>.jpg"><img src="http://revive-clothiers.com/assets/<%=@item.id%>/<%=img%>.jpg" alt="detail photo" /></a>
+                <%end%>
+    
+            <%end%>
+        </nav>
+          <div class="show_product_main_photo">
+                <img src="http://revive-clothiers.com/assets/<%=@item.id%>/0.jpg" />
+          </div>
+    	
+        <div class="product_description">
+            <header class="product">
+    <p>
+        <b><%=@item.product_description.titleize%></b>
+    </p>
+</header>
+
+Size: <%=@item.product_size%>
+<br /><br />
+Condition: <%=@item.condition%>/5
+
+<a class="link" target="_blank" href="http://revive-clothiers.com/conditions.html">(Condition Scale)</a>
+   
+<p>
+    <b>Condition Notes:</b>
+    <br />
+    <%=@item.condition_notes%>
+</p>
+
+    <p class="shipandstuff">
+    <b>Free Shipping (US Only)</b>
+    <br />
+    <%if @item.condition>=3%>
+    <b>Returns Accepted</b>
+    <%else%>
+    <b>Final Sale</b>
+    <%end%>
+</p>
+           <%if @item.department_id==2%>
+               <%details=%w(brand tie_material tie_construction color pattern)%>
+               <%measurements=%w(tie_width tie_length)%>
+
+           <%elsif @item.department_id==3%>
+                <%details=%w(brand tagged_size cloth_type cloth_color pattern collar_type cuff_type button_type)%>
+                <%measurements=%w(collar sleeve chest shirt_length)%>
+
+           <%elsif @item.department_id==5%>
+               <%details=%w(brand model model_number style color size width last upper_material sole_material heel_material sole heel lining insole)%>
+               <%measurements=%w(outsole_length outsole_width)%>
+
+            <%elsif @item.department_id==9%>
+                <%details=%w(retailer designer model cloth_maker cloth_color cloth_type pattern jacket_buttons jacket_vents lapel_type pocket_type coat_lining cuff_buttons coat_construction)%>
+                <%measurements=%w(shoulder chest jacket_waist sleeve cuff_extra jacket_length)%>
+
+            <%elsif @item.department_id==10%>
+                <%details=%w(retailer designer model cloth_maker cloth_color cloth_type pattern jacket_buttons jacket_vents lapel_type pocket_type coat_lining cuff_buttons coat_construction trouser_style trouser_fastenings trouser_lining trouser_details)%>
+                <%measurements=%w(shoulder chest jacket_waist sleeve cuff_extra jacket_length trouser_waist trouser_waist_extra inseam)%>
+
+            <%elsif @item.department_id==11%>
+                <%details=%w(brand coat_type cloth_color cloth_type pattern size jacket_buttons jacket_vents)%>
+                <%measurements=%w(shoulder chest jacket_waist full_sleeve sleeve cuff_extra jacket_length)%>
+
+            <%elsif @item.department_id==13%>
+                <%details=%w(brand tagged_size style cloth_type cloth_color pattern)%>
+                <%measurements=%w(chest sleeve shirt_length)%>
+            <%elsif @item.department_id==15%>
+               <%details=%w(brand artisan fabric_source mfg_date tie_material tie_construction color pattern)%>
+               <%measurements=%w(tie_width tie_length)%>
+
+            <%else%>
+            <%end%>
+
+
+            <%if details && measurements%>
+            <br />
+               <table class="product_details">
+                    <th><b>Details</b></th>
+                    <%details.each do |detail|%>
+                    <tr>
+                        <td>
+                            <b><%=detail.tr("_", " ").titleize%>:</b>
+                        </td>
+                        <td>
+                            <%=if @item.send(detail).is_a?(String)
+                                @item.send(detail).titleize
+                                else
+                                    @item.send(detail)
+                                end%>
+                        </td>
+                    </tr>
+                    <%end%>
+                </table>
+                <br /><br />
+                <table class="product_details">
+                    <th><b>Measurements</b></th>
+                    <%measurements.each do |measurement|%>
+                    <tr>
+                        <td>
+                            <b><%=measurement.tr("_", " ").titleize%></b>
+                        </td>
+                        <td>
+                            <%=@item.send(measurement)%>"
+                        </td>
+                    </tr>
+                        <%end%>
+                </table>
+                
+                <%end%>
+    	</div>
+	</article>
+</div>
+
+  <footer class="main_footer">
+    &copy;2012 Diligentia, LLC - All Rights Reserved
+  </footer>
+

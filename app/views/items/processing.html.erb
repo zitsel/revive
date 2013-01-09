@@ -22,8 +22,11 @@
     <%elsif @item.department_id ==13%>
     <h1>sweater processing</h1>
     <%= render 'dept13' %>
-    
-<%end%>
+    <%elsif @item.department_id ==15%>
+    <h1>handmade processing</h1>
+    <%= render 'dept15' %>
+
+    <%end%>
 
 <%= link_to 'Show', @item %> |
-<%= link_to 'Back', items_path %>
+<a href="/items/list/status/processing">Processing List</a>

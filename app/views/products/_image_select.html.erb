@@ -1,0 +1,5 @@
+    	  	<%if @image%>
+    	  		<%=image_tag("#{@item.id}/#{@image}.jpg")%>
+	  		<%else%>
+    	  		<%=image_tag("#{@item.id}/0.jpg")%>
+	  		<%end%>

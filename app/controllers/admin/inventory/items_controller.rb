@@ -1,12 +1,7 @@
 class Admin::Inventory::ItemsController < ApplicationController
-    http_basic_authenticate_with :name => "admin", :password => "vtq2tyib"
- 
+http_basic_authenticate_with :name => "admin", :password => "vtq2tyib"
   def index
-    @items = Item.where("name is not null")
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @items }
-    end
+    @items = Item.active
   end
 
   def inspection

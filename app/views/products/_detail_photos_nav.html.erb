@@ -1,0 +1,10 @@
+        <nav class="show_product_other_photos">
+
+            <%#This is some horrid code to show the photos of an item until I get the photos indexed in the database%>
+            <%(1..Dir.entries("/usr/local/share/public/dev/revive/app/assets/images/#{@item.id}/").size-3).to_a.each do |img|%>
+                <%if File.exist?("/usr/local/share/public/dev/revive/app/assets/images/#{@item.id}/#{img}.jpg")%>
+                <a target="_blank" href="http://revive-clothiers.com/assets/<%=@item.id%>/<%=img%>.jpg"><img src="http://revive-clothiers.com/assets/<%=@item.id%>/<%=img%>.jpg" alt="detail photo" /></a>
+                <%end%>
+    
+            <%end%>
+        </nav>

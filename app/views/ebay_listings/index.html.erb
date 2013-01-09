@@ -1,8 +1,9 @@
 <h1>Listing ebay listings</h1>
-<%= link_to 'New', new_ebay_listing_path%>
+<%= link_to 'List', "/list/listing"%>
 
 <table>
   <tr>
+    <th>Dept ID</th>
     <th>Item ID</th>
     <th>eBay ID</th>
     <th>Status</th>
@@ -11,8 +12,9 @@
 
 <% @listings.each do |listing| %>
   <tr>
+    <td><%= Item.find(listing.item_id).department_id %></td>
     <td><%= link_to listing.item_id, item_path(listing.item_id)%></td>
-    <td><%= listing.ebay_id %></td>
+    <td><a href="http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item=<%= listing.ebay_id%>"><%= listing.ebay_id%></a></td>
     <td><%= listing.status %></td>
     <td><%= link_to 'Edit', edit_ebay_listing_path(listing) %></td>
   </tr>

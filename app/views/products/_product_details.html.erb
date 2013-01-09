@@ -1,0 +1,66 @@
+   		   <%if @item.department_id==2%>
+               <%details=%w(brand tie_material tie_construction color pattern)%>
+               <%measurements=%w(tie_width tie_length)%>
+
+           <%elsif @item.department_id==3%>
+                <%details=%w(brand tagged_size cloth_type cloth_color pattern collar_type cuff_type button_type)%>
+                <%measurements=%w(collar sleeve chest shirt_length)%>
+
+           <%elsif @item.department_id==5%>
+               <%details=%w(brand model model_number style color size width last upper_material sole_material heel_material sole heel lining insole)%>
+               <%measurements=%w(outsole_length outsole_width)%>
+
+            <%elsif @item.department_id==9%>
+                <%details=%w(retailer designer model cloth_maker cloth_color cloth_type pattern jacket_buttons jacket_vents lapel_type pocket_type coat_lining cuff_buttons coat_construction)%>
+                <%measurements=%w(shoulder chest jacket_waist sleeve cuff_extra jacket_length)%>
+
+            <%elsif @item.department_id==10%>
+                <%details=%w(retailer designer model cloth_maker cloth_color cloth_type pattern jacket_buttons jacket_vents lapel_type pocket_type coat_lining cuff_buttons coat_construction trouser_style trouser_fastenings trouser_lining trouser_details)%>
+                <%measurements=%w(shoulder chest jacket_waist sleeve cuff_extra jacket_length trouser_waist trouser_waist_extra inseam)%>
+
+            <%elsif @item.department_id==11%>
+                <%details=%w(brand coat_type cloth_color cloth_type pattern size jacket_buttons jacket_vents)%>
+                <%measurements=%w(shoulder chest jacket_waist full_sleeve sleeve cuff_extra jacket_length)%>
+
+            <%elsif @item.department_id==13%>
+                <%details=%w(brand tagged_size style cloth_type cloth_color pattern)%>
+                <%measurements=%w(chest sleeve shirt_length)%>
+                
+    	    <%elsif @item.department_id==15%>
+    		<%details=%w(brand artisan mfg_date fabric_source tie_material tie_construction color pattern)%>
+    		<%measurements=%w(tie_width tie_length)%>
+
+            <%else%>
+            <%end%>
+
+
+            <%if details && measurements%>
+               <table class="product_details">
+                    <th>Details</th>
+                    <%details.each do |detail|%>
+                    <tr>
+                        <td>
+                            <b><%=detail.tr("_", " ").titleize%>:</b>
+                        </td>
+                        <td>
+                            <%=@item.send(detail)%>
+                        </td>
+                    </tr>
+                    <%end%>
+                </table>
+                <br /><br />
+                <table class="product_details">
+                    <th>Measurements</th>
+                    <%measurements.each do |measurement|%>
+                    <tr>
+                        <td>
+                            <b><%=measurement.tr("_", " ").titleize%></b>
+                        </td>
+                        <td>
+                            <%=@item.send(measurement)%>"
+                        </td>
+                    </tr>
+                        <%end%>
+                </table>
+                
+                <%end%>

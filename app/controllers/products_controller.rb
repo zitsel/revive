@@ -5,15 +5,19 @@ class ProductsController < ApplicationController
 
 	def categorized
 		@category=params[:category]
-
+		@classification=params[:classification]
 		if @category.nil?
-			@items=Item.active.recent
+			@classification ? @items=Item.send(@classification).recent : @items.Item.recent
 		else
-		@items=Item.active.send(@category)
+			@classification ? @items=Item.available.send(@classification).send(@category) : @items=Item.available.send(@category)
 		end
 	end
 	def show
 	    @item=Item.find(params[:id])
-	    @listing=EbayListing.active.find_by_item_id(@item.id)
+	    @listing = EbayListing.active.find_by_item_id(@item.id)
 	end
+	def ebay
+		@item=Item.find(params[:id])
+	end
+
 end

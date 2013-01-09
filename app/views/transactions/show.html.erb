@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @transaction.date %>
+</p>
+
+<b>Performance</b>
+<table>
+<tr>
+	<th>Qty Purchased</th>
+	<td><%=@transaction.items.count%></td>
+</tr>
+<tr>
+	<th>Qty Sold</th>
+	<td><%=@transaction.items.where(:status_id=>5).count%></td>
+</tr>
+<tr>
+	<th>Qty Active</th>
+	<td><%=@transaction.items.where(:status_id=>4).count%></td>
+</tr>
+<tr>
+	<th>Expenses</th>
+	<td><%=(@transaction.items.sum(:purchase_price)+@transaction.items.sum(:shipping_paid)).round(2)%></td>
+	<td>(Purchases: <%=@transaction.items.sum(:purchase_price).round(2)%></td>
+	<td>Shipping: <%=@transaction.items.sum(:shipping_paid)%>)</td>
+</tr>
+
+<tr>
+	<th>Revenue</th>
+	<td><%=(@transaction.items.sum(:sold_price)+@transaction.items.sum(:shipping_paid)).round(2)%></td>
+</tr>
+</table>
+<b>Items</b>
+
+
+<table border="1">
+	<tr>
+		<th>ID</th>
+		<th>Dept</th>
+		<th>Status</th>
+		<th>Purchase Price</th>
+		<th>Shipping Paid</th>
+		<th>Sold Amount</th>
+		<th>Shipping Charged</th>
+		<th>Rating</th>
+	</tr>
+
+	<%@transaction.items.each do |item|%>
+	<tr>
+		<td><%=link_to item.id, edit_item_path(item)%></td>
+		<td><%=item.department.name%></td>
+		<td><%=item.status.name%></td>
+		<td><%=item.purchase_price%></td>
+		<td><%=item.shipping_paid ? item.shipping_paid.round(2) : "" %></td>
+		<td><%=item.sold_price%></td>
+		<td><%=item.shipping_charge%></td>
+		<td><%=item.status.id==5 ? ((item.sold_price+item.shipping_charge-item.shipping_paid)/item.purchase_price).floor : ""%></td>
+	</tr>
+	<%end%>
+	</table>
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

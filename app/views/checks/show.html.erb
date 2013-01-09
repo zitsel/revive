@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @check.date %>
+</p>
+
+<p>
+  <b>Check number:</b>
+  <%= @check.check_number %>
+</p>
+
+<p>
+  <b>Amount words:</b>
+  <%= @check.amount_words %>
+</p>
+
+<p>
+  <b>Amount number:</b>
+  <%= @check.amount_number %>
+</p>
+
+<p>
+  <b>Pay to:</b>
+  <%= @check.pay_to %>
+</p>
+
+
+<%= link_to 'Edit', edit_check_path(@check) %> |
+<%= link_to 'Back', checks_path %>

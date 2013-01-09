@@ -1,0 +1,84 @@
+<h1>sales report <%=@from%> - <%=@to%></h1>
+<br />
+<h1>General Info</h1>
+<b>Items Purchased:</b> <%@ip=Item.where(:created_at=>(@from..@to))%><%=@ip.count%>
+<br />
+<b>New Listings Created:</b> <%=EbayListing.where(:listing_type=>"new",:created_at=>(@from..@to)).count%>
+<br />
+<b>Sold Items:</b> <%@si=Item.sold.where(:created_at=>(@from..@to))%><%=@si.count%>
+<br />
+<b>Cost of Purchases:</b> $<%=@ip.sum(:purchase_price)%>
+<br />
+<b>Sales Revenue:</b> $<%=@si.sum(:sold_price)%>
+<br />
+<b>Shipping Costs:</b> $<%=(@si.sum(:shipping_paid)-@si.sum(:shipping_charge)).round(2)%>
+
+<h1>Department Performance Averages</h1>
+<table border="1">
+  <tr>
+    <th>Dept ID</th>
+    <th>Dept Name</th>
+    <th>Qty Purchased</th>
+    <th>Qty Listed</th>
+    <th>Qty Sold</th>
+    <th>Avg Purchase Price</th>
+    <th>Avg Sale Price</th>
+    <th>Avg Shipping Costs</th>
+    <th>Avg Profit</th>
+
+  </tr>
+  <%Department.all.each do |dept|%>
+  <tr>
+    <td><%=dept.id%></td>
+    <td><%=dept.name%></td>I
+    <td></td>
+    <td></td>
+    <td><%=@sold_count=Item.sold.where(:department_id=>dept.id,:created_at=>(@from..@to)).count%></td>
+    <td><%=@sold_count > 0 ? @avg_pp=Item.sold.where(:department_id=>dept.id,:created_at=>(@from..@to)).average(:purchase_price).round(2) : "NA"%></td>
+    <td><%=@sold_count > 0 ? @avg_sp=Item.sold.where(:department_id=>dept.id,:created_at=>(@from..@to)).average(:sold_price).round(2) : "NA" %></td>
+   <%@shipping_charge=Item.sold.where(:department_id=>dept.id,:created_at=>(@from..@to)).sum(:shipping_paid)%>
+   <%@shipping_paid=Item.sold.where(:department_id=>dept.id,:created_at=>(@from..@to)).sum(:shipping_charge)%>
+   <td><%=@sold_count > 0 ? @avg_sc=((@shipping_charge-@shipping_paid)/@sold_count).round(2) : "NA"%></td>
+   <td><%=@sold_count > 0 ? (@avg_sp-@avg_pp-@avg_sc).round(2) : "" %></td>
+  </tr>
+<%end%>
+</table>
+
+<h1>Individual Item Performance</h1>
+<table border="1">
+  <tr>
+    <th>Dept ID</th>
+    <th>Item ID</th>
+    <th>Purchase  Price</th>
+    <th>Sold Price</th>
+    <th>Shipping Charged</th>
+    <th>Shipping Cost</th>
+    <th>Revenues</th>
+    <th>Expenses</th>
+    <th>Gross Profit</th>
+    <th>Times Listed</th>
+  </tr>
+
+<% @items.order(:id).each do |item| %>
+<%revenues=item.sold_price+item.shipping_charge%>
+
+<%expenses=item.purchase_price+item.shipping_paid%>
+<%profit=revenues-expenses%>
+  <tr>
+    <td><%=item.department_id%></td>
+    <td><%=link_to item.id, item%></td>
+    <td><%=item.purchase_price.round(2)%></td>
+    <td><%=item.sold_price.round(2)%></td>
+    <td><%=item.shipping_charge.round(2)%>
+    <td><%=item.shipping_paid.round(2)%></td>
+    <td><%=revenues.round(2)%></td>
+    <td><%=expenses.round(2)%></td>
+    <td><%=profit.round(2)%></td>
+    <td><%=item.ebay_listings.count%></td>
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+

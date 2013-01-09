@@ -1,5 +1,3 @@
-w
-
 <%= form_for(@item) do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
@@ -18,17 +16,15 @@ Item#<%= @item.id%>
 <br />
 <br />
 <% atts=Array.new %>
-<% atts=["retailer","designer","model","cloth_maker","cloth_color","cloth_type","pattern","jacket_buttons","jacket_vents","lapel_type","pocket_type","coat_lining","cuff_buttons","coat_construction","trouser_style","trouser_fastenings","trouser_lining","trouser_details","shoulder","chest","jacket_waist","sleeve","cuff_extra","jacket_length","trouser_waist","trouser_waist_extra","inseam"] %>
+<% atts=["retailer","designer","model","cloth_maker","cloth_color","cloth_type","pattern","jacket_buttons","jacket_vents","lapel_type","pocket_type","coat_lining","cuff_buttons","coat_construction","trouser_style","trouser_fastenings","trouser_lining","trouser_details","trouser_waist","trouser_waist_extra","inseam","shoulder","chest","jacket_waist","sleeve","cuff_extra","jacket_length","notes"] %>
 <% atts.map do |i| %>
 <div class="field">
     <%= f.label i %><br />
     <%= f.text_field i %>
 </div>
 <% end %>
-<%@item.status_id=2 unless @item.status_id==4%>
-<div class="field">
-  <%= f.hidden_field :status_id%>
-  <br />
-  <%= f.submit %>
-</div>
-<% end %>
+  <div class="actions">
+<%= f.submit %>
+    </div>
+<%end%>
+

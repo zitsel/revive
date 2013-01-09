@@ -2,9 +2,9 @@
     <header class="page_title">
     <h1>
 	<%if @category=="recent"%>
-	    latest 25 items
+	    Latest 25 Items
 	<% else %>
-	    Clothing > Men's > <%=@category%>
+	    Clothing > Men's > <%=@category.titleize%>
 	<%end%>
   </header>
 
@@ -12,7 +12,7 @@
     <% @items.map do |i| %>
       <div class="products_list_img">
 	  <a href="/products/show/<%=i.id%>">
-            <img src="/assets/<%=i.id%>/0.jpg" />
+	      <%= image_tag("#{i.id}/0.jpg")%>
           </a>
        <div class="products_list_desc">
           <br />

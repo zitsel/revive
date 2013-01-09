@@ -1,0 +1,20 @@
+<table border="1">
+	<tr>
+		<th>Dept #</th>
+		<th>Item #</th>
+		<th>Description</th>
+		<th>Purchase Price</th>
+	</tr>
+		
+		<%@sold.each do |item| %>
+		<tr>
+			<td><%=item.department_id%></td>
+			<td><%=item.id%></td>
+			<td><%=item.product_brand%> <%=item.product_description%></td>
+			<td><%=item.purchase_price%></td>
+		<%end%>
+	</tr>
+	</table>
+
+	@returns=returns.join(:ebay_listings).where(:ebay_listings => {:listing_type=>"auction"}).average(:)
+	@returns=returns.join(:ebay_listings).where(:ebay_listings => {:listing_type=>"buyitnow"})

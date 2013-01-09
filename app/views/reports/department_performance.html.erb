@@ -1,0 +1,28 @@
+<table border="1">
+	<tr>
+		<th>Dept #</th>
+		<th>Dept Name</th>
+		<th>Average Purchase Price</th>
+		<th>Average Sale Price</th>
+		<th>Average Net Ship Amount</th>
+		<th>Average Item Weight</th>
+		<th>Mix %</th>
+	</tr>
+		<%@depts=Department.all%>
+		<%@depts.each do |dept| %>
+		<tr>
+		<%@group=Item.where(:status_id=>5,:department_id=>dept.id)%>
+
+		<%if @group.count == 0 %>
+		<%else%>
+		<td><%=dept.id%></td>
+		<td><%=dept.name%></td>
+		<td>$<%=@group.average(:purchase_price).round(2).to_s%></td>
+		<td>$<%=@group.average(:sold_price).round(2).to_s%></td>
+		<td>$<%=(((@group.sum(:shipping_paid))-(@group.sum(:shipping_charge)))/(@group.count)).round(2).to_s%></td>
+		<td><%=@group.average(:weight).round(2).to_s%>g</td>
+		<td><%=((((@group.count.to_d)/(Item.sold.count.to_d)))*100).round(2)%>%</td>
+		<%end%>
+	</tr>
+	<%end%>
+</table>
