@@ -1,9 +1,0 @@
-
-<%if @item.department_id == 5 %>
-    <%= render 'dept5_auction' %>
-<%elsif @item.department_id == 10%>
-    <%= render 'dept10' %>
-<%end%>
-
-<%= link_to 'Show', @item %> |
-<%= link_to 'Back', items_path %>
