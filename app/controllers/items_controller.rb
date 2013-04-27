@@ -38,7 +38,7 @@ http_basic_authenticate_with :name => "admin", :password => "vtq2tyib"
       if params[:name] == "all"
         @items = Item.all
       else
-        @items = Item.where(:status_id => Status.find_by_name(params[:name])).order("department_id ASC").order("retail_price DESC")
+        @items = Item.where(:status_id => Status.find_by_name(params[:name])).order("id ASC").order("retail_price DESC")
       end
   end
 
@@ -83,12 +83,12 @@ http_basic_authenticate_with :name => "admin", :password => "vtq2tyib"
           @jlvar = @item.jacket_length-32
       end
       case 
-        when @item.sleeve.between?(24,25)
+        when @item.sleeve.between?(24,26)
           @slvar = 0
         when @item.sleeve.to_f < 24
           @slvar = @item.sleeve-24
-        when @item.sleeve.to_f > 25
-          @slvar = @item.sleeve-25
+        when @item.sleeve.to_f > 26
+          @slvar = @item.sleeve-26
       end
 
       @var = @slvar+@jlvar

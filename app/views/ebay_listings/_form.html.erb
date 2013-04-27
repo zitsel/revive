@@ -25,7 +25,7 @@
   <%= link_to "Retail", retail_item_path(@item)%> | 
   <br />
   <%@item_weight ? nil : @item_weight = 1
-    @sw = ((Hash["2", 25, "5", 225, "9", 250, "10", 250, "11", 350, "3", 25, "13", 250, "15", 250]["#{@item.department_id}"] + @item.weight)/28.349).divmod(16)%>
+    @sw = ((Hash["2", 25, "5", 225, "9", 75, "10", 75, "11", 75, "3", 25, "13", 75, "15", 250]["#{@item.department_id}"] + @item.weight)/28.349).divmod(16)%>
     <b>Ship Weight: </b>
     <br />
     <%="#{@sw[0]} LBS #{@sw[1].floor} OUNCES"%>

@@ -19,7 +19,6 @@ class Item < ActiveRecord::Base
 
   validates :name, :weight, :department_id, :purchase_price, :presence => true
   validates :weight, :department_id, :purchase_price, :numericality => true
-  validates :name, :length => { :minimum => 5 }
 
   scope :neckwear, where(department_id: "2")
   scope :shirts, where(department_id: "3")
